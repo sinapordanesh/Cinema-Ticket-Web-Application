@@ -1,10 +1,27 @@
 <?php
 
-class Movie
+class Movie implements DatabaseRelationships
 {
     private $title;
     private $releaseDate;
     private $theaters;
+
+    public function __construct($title, $releaseDate, $theaters)
+    {
+        $this->title = $title;
+        $this->releaseDate = $releaseDate;
+        $this->theaters = $theaters;
+    }
+
+    public function dbGet()
+    {
+        // TODO: Implement dbGet() method.
+    }
+
+    public function dbSet()
+    {
+        // TODO: Implement dbSet() method.
+    }
 
     /**
      * @return mixed
@@ -53,4 +70,14 @@ class Movie
     {
         $this->theaters = $theaters;
     }
+
+    public function dbGetTable(){
+
+    }
+
+    public function dbSetTable(){
+
+    }
+
+
 }
