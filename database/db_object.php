@@ -80,11 +80,6 @@ class Db_object {
 
     }
 
-
-
-
-
-
     protected function clean_properties() {
         global $database;
         $clean_properties = array();

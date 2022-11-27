@@ -1,4 +1,5 @@
 <?php
+require_once ("DatabaseRelationships.php");
 
 class Theater implements DatabaseRelationships
 {
@@ -7,12 +8,11 @@ class Theater implements DatabaseRelationships
     private $showTime;
     private $seats;
 
-    public function __construct($name, $currentMovie, $showTime, $seats)
+    public function __construct($name, $currentMovie, $showTime)
     {
         $this->name = $name;
         $this->currentMovie = $currentMovie;
         $this->showTime = $showTime;
-        $this->seats = $seats;
     }
 
 

@@ -1,6 +1,8 @@
 <?php
+require_once ("Controller.php");
+require_once ("Observer.php");
 
-class DashboardController implements Controller, Observer
+class DashboardController extends Controller implements Observer
 {
 
     public function update($update)

@@ -1,6 +1,8 @@
 <?php
 
-class AuthenticationController implements Controller
+require_once ("Controller.php");
+
+class AuthenticationController extends Controller
 {
 
 }

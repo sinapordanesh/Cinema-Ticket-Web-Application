@@ -1,3 +1,8 @@
+<?php
+ini_set('error_reporting', E_ALL);
+ini_set( 'display_errors', 1 );
+include_once "includes/loader.php"?>
+
 <!doctype html>
 <html lang="en">
 
@@ -9,12 +14,24 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+
+    <h2 class="text-center">Welcome to the Calgary Cinema </h2>
+    <div class="container vertical-center">
+        <div class="text-center">
+            <a href="">
+                <button class="btn btn-primary">Login</button>
+            </a>
+            <a href="movieSearchPage.php">
+                <button class="btn btn-success">Movies Search</button>
+            </a>
+            <a href="">
+                <button class="btn btn-danger">Ticket Cancelling</button>
+            </a>
+        </div>
+    </div>
 
 </head>
 <body>
-<h1>Hello, world!</h1>
-
 <!-- Optional JavaScript; choose one of the two! -->
 
 <!-- Option 1: Bootstrap Bundle with Popper -->

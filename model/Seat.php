@@ -1,4 +1,5 @@
 <?php
+require_once ("DatabaseRelationships.php");
 
 class Seat implements DatabaseRelationships
 {

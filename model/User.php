@@ -1,6 +1,7 @@
 <?php
+require_once ("DatabaseRelationships.php");
 
-abstract class User
+abstract class User implements DatabaseRelationships
 {
     private $userId;
     private $name;
@@ -11,6 +12,16 @@ abstract class User
         $this->userId = $userId;
         $this->name = $name;
         $this->isAdmin = $isAdmin;
+    }
+
+    public function dbGet()
+    {
+        // TODO: Implement dbGet() method.
+    }
+
+    public function dbSet()
+    {
+        // TODO: Implement dbSet() method.
     }
 
     /**

@@ -1,5 +1,9 @@
 <?php
 
+require_once ("DatabaseRelationships.php");
+require_once ("Subject.php");
+
+
 class News implements DatabaseRelationships , Subject
 {
     private $title;
@@ -25,12 +29,12 @@ class News implements DatabaseRelationships , Subject
         // TODO: Implement dbSet() method.
     }
 
-    public function registerObserver()
+    public function registerObserver($observer)
     {
         // TODO: Implement registerObserver() method.
     }
 
-    public function removeObserver()
+    public function removeObserver($observer)
     {
         // TODO: Implement removeObserver() method.
     }

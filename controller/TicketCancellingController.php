@@ -1,6 +1,7 @@
 <?php
+require_once ("Controller.php");
 
-class TicketCancellingController implements Controller
+class TicketCancellingController extends Controller
 {
 
 }

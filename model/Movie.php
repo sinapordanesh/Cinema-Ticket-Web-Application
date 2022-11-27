@@ -1,16 +1,19 @@
 <?php
 
+require_once ("DatabaseRelationships.php");
+
 class Movie implements DatabaseRelationships
 {
-    private $title;
+    private $name;
+    private $price;
     private $releaseDate;
-    private $theaters;
+    private $theaters = array();
 
-    public function __construct($title, $releaseDate, $theaters)
+    public function __construct($title, $price, $releaseDate)
     {
-        $this->title = $title;
+        $this->name = $title;
+        $this->price = $price;
         $this->releaseDate = $releaseDate;
-        $this->theaters = $theaters;
     }
 
     public function dbGet()
@@ -26,17 +29,33 @@ class Movie implements DatabaseRelationships
     /**
      * @return mixed
      */
-    public function getTitle()
+    public function getName()
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**
-     * @param mixed $title
+     * @param mixed $name
      */
-    public function setTitle($title)
+    public function setName($name)
     {
-        $this->title = $title;
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
     }
 
     /**
