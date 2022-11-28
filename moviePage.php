@@ -7,6 +7,15 @@
     $pc->searchTheaterByMovieName($_GET["movie"]);
 
 
+    $theaterNames = $pc->getAvailableTheaterNames();
+
+    $ticket = [
+        "movie" => "",
+        "theater" => "",
+        "time" => 0,
+        "seat" => "",
+    ];
+
 ?>
 
 
@@ -20,6 +29,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
     <style>
         /* Style to center grid column */
         .col-centered{
@@ -49,20 +60,74 @@
                          class="card-img-top" alt="Apple Computer" />
                     <div class="card-body">
                         <div class="text-center">
-                            <h5 class="card-title">Believing is seeing</h5>
-                            <p class="text-muted mb-4">Apple pro display XDR</p>
+                            <h5 class="card-title"><?= $pc->getMovie()->getName()?></h5>
+                            <p class="text-muted mb-4">Ticket Page</p>
                         </div>
-                        <div>
-                            <div class="d-flex justify-content-between">
-                                <span>Pro Display XDR</span><span>$5,999</span>
+
+                        <form method="post" action="./moviePage.php?movie=<?=$_GET["movie"]?>">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Select Theater</label>
+                                <div class="d-flex justify-content-between">
+                                    <select name="select_theater" id="select_theater" class="form-select" aria-label="Default select example">
+                                        <?php
+                                        foreach ($theaterNames as $theaterName):
+                                            ?>
+                                            <option value="<?=$theaterName?>"><?=$theaterName?></option>
+                                        <?php
+                                        endforeach;
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <span>Pro stand</span><span>$999</span>
+                            <button type="submit" class="btn btn-primary">Select</button>
+                        </form>
+
+                        <form method="post" action="./moviePage.php?movie=<?=$_GET["movie"]?>">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Select Theater's Showtime</label>
+                                <div class="d-flex justify-content-between">
+                                    <select name="select_time" id="select_time" class="form-select" aria-label="Default select example">
+                                        <?php
+                                        $selectedTheater = $pc->getTheaterAvailableTime($_POST['select_theater']);
+                                        $i = 0;
+                                        foreach ($selectedTheater as $item):
+                                            ?>
+                                            <option value="<?= $i?>"><?= date('Y-m-d H:i:s',$item->getShowTime())?></option>
+                                            <?php
+                                            $i++;
+                                        endforeach;
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <span>Vesa Mount Adapter</span><span>$199</span>
+                            <button type="submit" class="btn btn-primary">Select</button>
+                        </form>
+
+                        <form>
+
+                            <script>
+                                // $(function (){
+                                //     $("#select_theater").change(function (){
+                                //         var displaycourse = $("#select_theater option:selected").text();
+                                //         $("#id").val(displaycourse);
+                                //     })
+                                // })
+                            </script>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+
                         <div class="d-flex justify-content-between total font-weight-bold mt-4">
                             <span>Total</span><span>$7,197.00</span>
                         </div>

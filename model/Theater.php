@@ -29,7 +29,7 @@ class Theater extends ModelsDatabase
 
     private function dbGetSeats()
     {
-        $result = self::find_this_query("SELECT * FROM seats WHERE theater IS '$this->name' AND showTime IS $this->showTime");
+        $result = self::find_this_query("SELECT * FROM seats WHERE theater='$this->name' AND showTime='$this->showTime'");
 
         foreach ($result as $item){
             $this->seats [] = new Seat($item["seatId"], $item["theater"], $item["showTime"], $item["available"]);

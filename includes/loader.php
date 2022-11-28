@@ -6,7 +6,7 @@ require_once("model/Movie.php");
 require_once("model/Theater.php");
 require_once("model/Seat.php");
 require_once("model/Coupon.php");
-require_once("model/DatabaseRelationships.php");
+require_once("model/ModelsDatabase.php");
 require_once("model/Movie.php");
 require_once("model/News.php");
 require_once("model/RegisteredUser.php");
