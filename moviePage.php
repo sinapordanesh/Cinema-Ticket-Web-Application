@@ -4,6 +4,7 @@
     $pc = new PurchaseController();
 
     $pc->searchMovieByName($_GET["movie"]);
+    $pc->searchTheaterByMovieName($_GET["movie"]);
 
 
 ?>

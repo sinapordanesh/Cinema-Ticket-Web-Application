@@ -1,10 +1,10 @@
 <?php
 
-require_once ("DatabaseRelationships.php");
+require_once ("ModelsDatabase.php");
 require_once ("Subject.php");
 
 
-class News implements DatabaseRelationships , Subject
+class News extends ModelsDatabase implements Subject
 {
     private $title;
     private $content;

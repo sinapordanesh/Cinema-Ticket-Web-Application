@@ -20,4 +20,8 @@ class PurchaseController extends Controller
             $this->theaters [] = new Theater($item["name"], $item["movie"], $item["showTime"]);
         }
     }
+
+    public function seatFeed($){
+
+    }
 }

@@ -1,7 +1,7 @@
 <?php
-require_once ("DatabaseRelationships.php");
+require_once ("ModelsDatabase.php");
 
-abstract class User implements DatabaseRelationships
+abstract class User extends ModelsDatabase
 {
     private $userId;
     private $name;

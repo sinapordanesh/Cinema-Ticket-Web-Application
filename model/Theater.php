@@ -1,18 +1,19 @@
 <?php
-require_once ("DatabaseRelationships.php");
+require_once ("ModelsDatabase.php");
 
-class Theater implements DatabaseRelationships
+class Theater extends ModelsDatabase
 {
     private $name;
     private $currentMovie;
     private $showTime;
-    private $seats;
+    private $seats = array();
 
     public function __construct($name, $currentMovie, $showTime)
     {
         $this->name = $name;
         $this->currentMovie = $currentMovie;
         $this->showTime = $showTime;
+        $this->dbGetSeats();
     }
 
 
@@ -26,7 +27,13 @@ class Theater implements DatabaseRelationships
         // TODO: Implement dbSet() method.
     }
 
-    public function dbGetSeats(){
+    private function dbGetSeats()
+    {
+        $result = self::find_this_query("SELECT * FROM seats WHERE theater IS '$this->name' AND showTime IS $this->showTime");
+
+        foreach ($result as $item){
+            $this->seats [] = new Seat($item["seatId"], $item["theater"], $item["showTime"], $item["available"]);
+        }
 
     }
 

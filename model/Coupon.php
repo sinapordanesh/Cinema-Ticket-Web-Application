@@ -1,6 +1,8 @@
 <?php
 
-class Coupon implements DatabaseRelationships
+require_once ("ModelsDatabase.php");
+
+class Coupon extends ModelsDatabase
 {
     private $couponId;
     private $amount;

@@ -1,7 +1,7 @@
 <?php
-require_once ("DatabaseRelationships.php");
+require_once ("ModelsDatabase.php");
 
-class Seat implements DatabaseRelationships
+class Seat extends ModelsDatabase
 {
     private $seatId;
     private $theater;

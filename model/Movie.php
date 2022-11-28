@@ -1,8 +1,8 @@
 <?php
 
-require_once ("DatabaseRelationships.php");
+require_once ("ModelsDatabase.php");
 
-class Movie implements DatabaseRelationships
+class Movie extends ModelsDatabase
 {
     private $name;
     private $price;
