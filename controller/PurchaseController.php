@@ -46,9 +46,9 @@ class PurchaseController extends Controller
         return $theaterObjects;
     }
 
-    public static function ticketCreation($userId, $movie, $showTime, $purchaseTime, $seatNumber, $price, $email){
+    public static function ticketCreation($userId, $movie,$theater, $showTime, $purchaseTime, $seatNumber, $price, $email){
         $uniqueId = rand(100000, 999999);
-        $ticket = new Ticket($uniqueId, $userId, $movie, $showTime, $purchaseTime, $seatNumber, $price, $email);
+        $ticket = new Ticket($uniqueId, $userId, $movie, $theater, $showTime, $purchaseTime, $seatNumber, $price, $email);
         return $ticket->dbCreate();
     }
 

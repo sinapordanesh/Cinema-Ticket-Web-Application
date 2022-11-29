@@ -1,11 +1,9 @@
 <?php
 include_once "includes/loader.php";
 
-$ticketCreation = PurchaseController::ticketCreation(-1, $_SESSION["ticket"]["movie"], $_SESSION["ticket"]["theater"], time(), $_SESSION["ticket"]["seatNumber"], $_SESSION["ticket"]["price"], $_SESSION["ticket"]["email"]);
+$ticketCreation = PurchaseController::ticketCreation(-1, $_SESSION["ticket"]["movie"], $_SESSION["ticket"]["theater"], $_SESSION["ticket"]["showTime"], time(), $_SESSION["ticket"]["seatNumber"], $_SESSION["ticket"]["price"], $_SESSION["ticket"]["email"]);
 
-if ($ticketCreation){
-    echo "sssssssssss";
-}
+if ($ticketCreation):
 
 ?>
 
@@ -53,7 +51,17 @@ if ($ticketCreation){
         <i class="checkmark">✓</i>
     </div>
     <h1>Success</h1>
-    <p>We received your payment;<br/> You'll get an email from us within your ticket details!</p>
+    <h3>We received your payment;</h3>
+        <br/>
+    <h4>You'll get an email from us within your ticket details!</h4>
+    <br/>
+    <h6> You will redirect to the mein page in 5 seconds...</h6>
 </div>
 </body>
 </html>
+
+<?php
+//    sleep(5);
+//    header("Location: index.php");
+endif;
+?>
