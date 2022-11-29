@@ -4,12 +4,23 @@ include_once "includes/loader.php";
 $ticketCreation = PurchaseController::ticketCreation(-1, $_SESSION["ticket"]["movie"], $_SESSION["ticket"]["theater"], $_SESSION["ticket"]["showTime"], time(), $_SESSION["ticket"]["seatNumber"], $_SESSION["ticket"]["price"], $_SESSION["ticket"]["email"]);
 
 if ($ticketCreation):
-
+//
+//
 ?>
 
 <html>
 <head>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Center Align Buttons in Bootstrap</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 </head>
 <style>
     body {
@@ -55,13 +66,13 @@ if ($ticketCreation):
         <br/>
     <h4>You'll get an email from us within your ticket details!</h4>
     <br/>
-    <h6> You will redirect to the mein page in 5 seconds...</h6>
+    <form method="get" action="index.php">
+        <button type="submit" class="btn btn-primary">Return</button>
+    </form>
 </div>
 </body>
 </html>
 
 <?php
-//    sleep(5);
-//    header("Location: index.php");
 endif;
 ?>
