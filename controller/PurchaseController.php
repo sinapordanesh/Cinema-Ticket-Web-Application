@@ -46,6 +46,12 @@ class PurchaseController extends Controller
         return $theaterObjects;
     }
 
+    public static function ticketCreation($userId, $movie, $showTime, $purchaseTime, $seatNumber, $price, $email){
+        $uniqueId = rand(100000, 999999);
+        $ticket = new Ticket($uniqueId, $userId, $movie, $showTime, $purchaseTime, $seatNumber, $price, $email);
+        return $ticket->dbCreate();
+    }
+
     /**
      * @return mixed
      */
@@ -77,5 +83,5 @@ class PurchaseController extends Controller
     {
         return $this->theaters;
     }
-
 }
+

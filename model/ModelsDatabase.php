@@ -17,4 +17,16 @@ class ModelsDatabase
         return $the_object_array;
     }
 
+    public function create($sql)
+    {
+        global $database;
+
+        if ($database->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 }

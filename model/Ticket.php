@@ -3,21 +3,25 @@ require_once ("ModelsDatabase.php");
 
 class Ticket extends ModelsDatabase
 {
-    private $ticketId;
+    private $uniqueId;
     private $userId = -1;
     private $movie;
     private $showTime;
-    private $purchaseDate;
-    private $seats;
+    private $purchaseTime;
+    private $seatNumber;
+    private $price;
+    private $email;
 
-    public function __construct($ticketId, $userId, $movie, $showTime, $purchaseDate, $seats)
+    public function __construct($uniqueId, $userId, $movie, $showTime, $purchaseTime, $seatNumber, $price, $email)
     {
-        $this->ticketId = $ticketId;
+        $this->uniqueId = $uniqueId;
         $this->userId = $userId;
         $this->movie = $movie;
         $this->showTime = $showTime;
-        $this->purchaseDate = $purchaseDate;
-        $this->seats = $seats;
+        $this->purchaseTime = $purchaseTime;
+        $this->seatNumber = $seatNumber;
+        $this->price = $price;
+        $this->email = $email;
     }
 
     public function dbGet()
@@ -25,8 +29,13 @@ class Ticket extends ModelsDatabase
         // TODO: Implement dbGet() method.
     }
 
-    public function dbSet()
+    public function dbCreate()
     {
-        // TODO: Implement dbSet() method.
+        $sql = "INSERT INTO ";
+        $sql .= "tickets (uniqueId, userId, movie, showTime, purchaseTime, seatNumber, price, email)";
+        $sql .= " VALUES ($this->uniqueId, $this->userId, $this->movie, $this->showTime, $this->purchaseTime, $this->seatNumber, $this->price, $this->email)";
+        die($sql);
+        return self::create($sql);
+
     }
 }

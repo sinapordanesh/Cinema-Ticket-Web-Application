@@ -12,10 +12,11 @@
     $ticket = [
         "movie" => "",
         "theater" => "",
-        "time" => 0,
-        "seat" => "",
+        "showTime" => 0,
+        "seatNumber" => "",
+        "price" => 0,
+        "email" => ""
     ];
-
 ?>
 
 
@@ -64,11 +65,15 @@
                             <p class="text-muted mb-4">Ticket Page</p>
                         </div>
 
+                        <?php
+                        if (@!$_POST["select_theater"]):
+                            ?>
+
                         <form method="post" action="./moviePage.php?movie=<?=$_GET["movie"]?>">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Select Theater</label>
                                 <div class="d-flex justify-content-between">
-                                    <select name="select_theater" id="select_theater" class="form-select" aria-label="Default select example">
+                                    <select name="select_theater" id="select_theater" class="form-select" aria-label="Default select example" onselect="<?=@$_POST["select_theater"]?>">
                                         <?php
                                         foreach ($theaterNames as $theaterName):
                                             ?>
@@ -82,6 +87,11 @@
                             <button type="submit" class="btn btn-primary">Select</button>
                         </form>
 
+                        <?php
+                        endif;
+                        if (@!$_POST["select_time"] && @$_POST["select_theater"]):
+                        ?>
+                        <h5>Cinema: <?=@$_POST["select_theater"]?> is selected</h5>
                         <form method="post" action="./moviePage.php?movie=<?=$_GET["movie"]?>">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Select Theater's Showtime</label>
@@ -89,7 +99,7 @@
                                     <select name="select_time" id="select_time" class="form-select" aria-label="Default select example">
                                         <?php
                                         $selectedTheater = $pc->getTheaterAvailableTime($_POST['select_theater']);
-                                        $i = 0;
+                                        $i = 1;
                                         foreach ($selectedTheater as $item):
                                             ?>
                                             <option value="<?= $i?>"><?= date('Y-m-d H:i:s',$item->getShowTime())?></option>
@@ -100,37 +110,73 @@
                                     </select>
                                 </div>
                             </div>
+                            <input type="hidden" name="select_theater" id="select_theater" value="<?=$_POST['select_theater']?>" />
                             <button type="submit" class="btn btn-primary">Select</button>
                         </form>
 
-                        <form>
+                        <?php
+                        endif;
+                        if (@$_POST["select_time"] && @$_POST["select_theater"] && @!$_POST["select_seat"]):
+                            $selectedTheater = $pc->getTheaterAvailableTime($_POST['select_theater'])
+                        ?>
 
-                            <script>
-                                // $(function (){
-                                //     $("#select_theater").change(function (){
-                                //         var displaycourse = $("#select_theater option:selected").text();
-                                //         $("#id").val(displaycourse);
-                                //     })
-                                // })
-                            </script>
-
+                        <h5>Cinema: <?=@$selectedTheater[$_POST["select_time"] - 1]->getName()?></h5>
+                        <h5>Date & Time: <?=@date('Y-m-d H:i',@$selectedTheater[$_POST["select_time"] - 1]->getShowTime())?> </h5>
+                        <form method="post" action="./moviePage.php?movie=<?=$_GET["movie"]?>">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <label for="exampleInputEmail1">Select Your Seat</label>
+                                <div class="d-flex justify-content-between">
+                                    <select name="select_seat" id="select_seat" class="form-select" aria-label="Default select example">
+                                        <?php
+                                        $selectedTheaterObject = $selectedTheater[$_POST["select_time"] - 1];
+                                        foreach ($selectedTheaterObject->getSeats() as $seat):
+                                            if ($seat->getAvailable()):
+                                            ?>
+                                            <option value="<?= $seat->getSeatId()?>"><?= $seat->getSeatId()?></option>
+                                        <?php
+                                            endif;
+                                        endforeach;
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <input type="hidden" name="select_theater" id="select_theater" value="<?=$_POST['select_theater']?>" />
+                            <input type="hidden" name="select_time" id="select_time" value="<?=$_POST['select_time']?>" />
+                            <button type="submit" class="btn btn-primary">Select</button>
                         </form>
 
+                        <?php
+                        endif;
+                        if (@$_POST["select_time"] && @$_POST["select_theater"] && @$_POST["select_seat"]):
+
+                        $selectedTheater = $pc->getTheaterAvailableTime($_POST['select_theater']);
+                        $ticket["movie"] = $_GET["movie"];
+                        $ticket["theater"] = $_POST["select_theater"];
+                        $ticket["showTime"] = @$selectedTheater[$_POST["select_time"] - 1]->getShowTime();
+                        $ticket["seatNumber"] = $_POST["select_seat"];
+                        $ticket["price"] = $pc->getMovie()->getPrice();
+                        $_SESSION["ticket"] = $ticket;
+                        ?>
+
+                        <h5>Cinema: <?=@$selectedTheater[$_POST["select_time"] - 1]->getName()?></h5>
+                        <h5>Date & Time: <?=@date('Y-m-d H:i',@$selectedTheater[$_POST["select_time"] - 1]->getShowTime())?> </h5>
+                        <h5>Seat Number: <?=$_POST["select_seat"]?> </h5>
+                        <form method="post" action="checkoutPage.php">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input required type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Check Out</button>
+                        </form>
 
                         <div class="d-flex justify-content-between total font-weight-bold mt-4">
-                            <span>Total</span><span>$7,197.00</span>
+                            <span>Total</span><span><?= $pc->getMovie()->getPrice()?></span>
                         </div>
+                        <?php
+                        endif;
+                        ?>
                     </div>
                 </div>
             </div>
