@@ -4,12 +4,12 @@ require_once ("ModelsDatabase.php");
 
 class Coupon extends ModelsDatabase
 {
-    private $couponId;
+    private $uniqueId;
     private $amount;
     private $expiryDate;
 
-    function __construct($couponId, $amount, $expiryDate){
-        $this->couponId = $couponId;
+    function __construct($uniqueId, $amount, $expiryDate){
+        $this->uniqueId = $uniqueId;
         $this->amount = $amount;
         $this->expiryDate = $expiryDate;
     }
@@ -19,25 +19,30 @@ class Coupon extends ModelsDatabase
         // TODO: Implement dbGet() method.
     }
 
-    public function dbSet()
+    public function dbCreate()
     {
-        // TODO: Implement dbSet() method.
+        $sql = "INSERT INTO ";
+        $sql .= "coupon (uniqueId, amount, expiryDate)";
+        $sql .= " VALUES ($this->uniqueId, $this->amount, '$this->expiryDate')";
+//        die($sql);
+        return self::create($sql);
+
     }
 
     /**
      * @return mixed
      */
-    public function getCouponId()
+    public function getUniqueId()
     {
-        return $this->couponId;
+        return $this->uniqueId;
     }
 
     /**
-     * @param mixed $couponId
+     * @param mixed $uniqueId
      */
-    public function setCouponId($couponId)
+    public function setUniqueId($uniqueId)
     {
-        $this->couponId = $couponId;
+        $this->uniqueId = $uniqueId;
     }
 
     /**

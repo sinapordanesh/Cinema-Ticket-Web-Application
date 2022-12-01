@@ -18,13 +18,13 @@ include_once "includes/loader.php"?>
     <h2 class="text-center">Welcome to the Calgary Cinema </h2>
     <div class="container vertical-center">
         <div class="text-center">
-            <a href="">
+            <a href="loginPage.php">
                 <button class="btn btn-primary">Login</button>
             </a>
             <a href="movieSearchPage.php">
                 <button class="btn btn-success">Movies Search</button>
             </a>
-            <a href="">
+            <a href="cancellingTicketPage1.php">
                 <button class="btn btn-danger">Ticket Cancelling</button>
             </a>
         </div>

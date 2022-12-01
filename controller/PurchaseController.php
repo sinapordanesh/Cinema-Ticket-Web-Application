@@ -49,9 +49,30 @@ class PurchaseController extends Controller
     public static function ticketCreation($userId, $movie,$theater, $showTime, $purchaseTime, $seatNumber, $price, $email){
         $uniqueId = rand(100000, 999999);
         $ticket = new Ticket($uniqueId, $userId, $movie, $theater, $showTime, $purchaseTime, $seatNumber, $price, $email);
-        return $ticket->dbCreate();
+        if ($ticket->dbCreate()){
+            $singleton = Singleton::getOnlyInstance();
+            $singleton->addTicket($ticket);
+            return true;
+        } else{
+            return false;
+        }
     }
 
+    public static function emailSender(){
+        $singleton = Singleton::getOnlyInstance();
+        $ticket = $singleton->getLastAddedTicket();
+
+        $to = $ticket->getEmail();
+        $subject = "Ticket Purchase Confirmation";
+        $message = "Salam";
+        $header = "From: " . strip_tags("noreply@calgarycinema.ca") . "\r\n";
+        $header .= "Reply-To: " . strip_tags("noreply@calgarycinema.ca") . "\r\n";
+        if (mail("cegeh34615@cosaxu.com", $subject, $message, $header)){
+            return true;
+        } else{
+            return false;
+        }
+    }
     /**
      * @return mixed
      */

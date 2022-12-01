@@ -4,14 +4,16 @@ require_once ("ModelsDatabase.php");
 abstract class User extends ModelsDatabase
 {
     private $userId;
+    private $email;
     private $name;
-    private $isAdmin;
+    private $role;
 
-    public function __construct($userId, $name, $isAdmin)
+    public function __construct($userId, $email, $name, $role)
     {
         $this->userId = $userId;
+        $this->email = $email;
         $this->name = $name;
-        $this->isAdmin = $isAdmin;
+        $this->role = $role;
     }
 
     public function dbGet()
@@ -43,6 +45,22 @@ abstract class User extends ModelsDatabase
     /**
      * @return mixed
      */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getName()
     {
         return $this->name;
@@ -59,17 +77,17 @@ abstract class User extends ModelsDatabase
     /**
      * @return mixed
      */
-    public function getIsAdmin()
+    public function getRole()
     {
-        return $this->isAdmin;
+        return $this->role;
     }
 
     /**
      * @param mixed $isAdmin
      */
-    public function setIsAdmin($isAdmin)
+    public function setRole($role)
     {
-        $this->isAdmin = $isAdmin;
+        $this->role = $role;
     }
 
 }

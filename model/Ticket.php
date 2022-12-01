@@ -40,4 +40,147 @@ class Ticket extends ModelsDatabase
         return self::create($sql);
 
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUniqueId()
+    {
+        return $this->uniqueId;
+    }
+
+    /**
+     * @param mixed $uniqueId
+     */
+    public function setUniqueId($uniqueId)
+    {
+        $this->uniqueId = $uniqueId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param int $userId
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMovie()
+    {
+        return $this->movie;
+    }
+
+    /**
+     * @param mixed $movie
+     */
+    public function setMovie($movie)
+    {
+        $this->movie = $movie;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTheater()
+    {
+        return $this->theater;
+    }
+
+    /**
+     * @param mixed $theater
+     */
+    public function setTheater($theater)
+    {
+        $this->theater = $theater;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShowTime()
+    {
+        return $this->showTime;
+    }
+
+    /**
+     * @param mixed $showTime
+     */
+    public function setShowTime($showTime)
+    {
+        $this->showTime = $showTime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPurchaseTime()
+    {
+        return $this->purchaseTime;
+    }
+
+    /**
+     * @param mixed $purchaseTime
+     */
+    public function setPurchaseTime($purchaseTime)
+    {
+        $this->purchaseTime = $purchaseTime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSeatNumber()
+    {
+        return $this->seatNumber;
+    }
+
+    /**
+     * @param mixed $seatNumber
+     */
+    public function setSeatNumber($seatNumber)
+    {
+        $this->seatNumber = $seatNumber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
 }

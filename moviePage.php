@@ -17,6 +17,8 @@
         "price" => 0,
         "email" => ""
     ];
+    $_SESSION["pcObject"] = $pc;
+
 ?>
 
 
@@ -102,7 +104,7 @@
                                         $i = 1;
                                         foreach ($selectedTheater as $item):
                                             ?>
-                                            <option value="<?= $i?>"><?= date('Y-m-d H:i:s',$item->getShowTime())?></option>
+                                            <option value="<?= $i?>"><?= date('Y-m-d H:i',$item->getShowTime())?></option>
                                             <?php
                                             $i++;
                                         endforeach;
@@ -185,3 +187,5 @@
 </section>
 </body>
 </html>
+<?php
+?>

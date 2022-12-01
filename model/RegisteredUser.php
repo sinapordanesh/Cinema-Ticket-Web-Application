@@ -4,15 +4,15 @@ require_once ("User.php");
 class RegisteredUser extends User
 {
     private $address;
-    private $activationFee;
+    private $feePayment;
     private $expiryDate;
     private $creditCardNumber;
 
-    public function __construct($userId, $name, $isAdmin, $address, $activationFee, $expiryDate, $creditCardNumber)
+    public function __construct($userId, $email, $name, $role, $address, $feePayment, $expiryDate, $creditCardNumber)
     {
-        parent::__construct($userId, $name, $isAdmin);
+        parent::__construct($userId, $email, $name, $role);
         $this->address = $address;
-        $this->activationFee = $activationFee;
+        $this->feePayment = $feePayment;
         $this->expiryDate = $expiryDate;
         $this->creditCardNumber = $creditCardNumber;
     }
@@ -36,17 +36,17 @@ class RegisteredUser extends User
     /**
      * @return mixed
      */
-    public function getActivationFee()
+    public function getFeePayment()
     {
-        return $this->activationFee;
+        return $this->feePayment;
     }
 
     /**
-     * @param mixed $activationFee
+     * @param mixed $feePayment
      */
-    public function setActivationFee($activationFee)
+    public function setActivationFee($feePayment)
     {
-        $this->activationFee = $activationFee;
+        $this->feePayment = $feePayment;
     }
 
     /**

@@ -2,6 +2,7 @@
 ini_set('error_reporting', E_ALL);
 ini_set( 'display_errors', 1 );
 session_start();
+require_once ("Singleton.php");
 require_once("model/Movie.php");
 require_once("model/Theater.php");
 require_once("model/Seat.php");
@@ -30,3 +31,11 @@ require_once("view/TicketCancellingPage.php");
 require_once("view/UserDashboardPage.php");
 require_once("view/UserInterface.php");
 
+
+
+function redirect($location)
+{
+    header("Location: {$location}");
+}
+
+$salam = "salam";

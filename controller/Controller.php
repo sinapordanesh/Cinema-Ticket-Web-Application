@@ -2,6 +2,7 @@
 
 class Controller
 {
+
     public static function find_this_query($sql)
     {
         global $database;
@@ -16,4 +17,6 @@ class Controller
 
         return $the_object_array;
     }
+
+
 }

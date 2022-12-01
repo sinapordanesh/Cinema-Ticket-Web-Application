@@ -8,3 +8,4 @@ const DB_PASS = '';
 const DB_NAME = 'cinema_ticket_application';
 
 
+

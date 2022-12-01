@@ -1,14 +1,16 @@
 <?php
     include_once "includes/loader.php";
+    if (isset($_SESSION["login"])){
+        $user = true;
+    } else{
+        $user = false;
+    }
 
-    $ticketCreation = PurchaseController::ticketCreation(-1, $_SESSION["ticket"]["movie"], $_SESSION["ticket"]["theater"], $_SESSION["ticket"]["showTime"], time(), $_SESSION["ticket"]["seatNumber"], $_SESSION["ticket"]["price"], $_SESSION["ticket"]["email"]);
-
-    $singleton = Singleton::getOnlyInstance();
-    $ticket = $singleton->getLastAddedTicket();
-
-    if ($ticketCreation):
-        PurchaseController::emailSender();
-
+    $cc = new TicketCancellingController();
+    $cc->searchTicketById($_SESSION["cancellationTicketId"]);
+    $ticket = TicketCancellingController::$ticket;
+    TicketCancellingController::couponCreation($ticket->getPrice(), $user);
+    $coupon = TicketCancellingController::$coupon;
 ?>
 
 <html>
@@ -65,13 +67,26 @@
         <i class="checkmark">✓</i>
     </div>
     <h1>Success</h1>
-    <h3>We received your payment;</h3>
-        <br/>
-    <h4>You'll get an email from us within your ticket details!</h4>
+    <h3>We cancelled your ticket</h3>
     <br/>
-    <h5>Ticket ID: <?=$ticket->getUniqueId()?></h5>
+    <h4>You'll get an email from us within cancellation confirmation and your coupon</h4>
     <br/>
-    <h5>Please keep the Ticket ID for cancellation!</h5>
+    <h5>Coupon ID: <b><?=$coupon->getUniqueId()?></b></h5>
+    <br/>
+    <h5>Coupon Amount: $<b><?=round($coupon->getAmount(), 2)?></b></h5>
+    <?php
+    if (!$user){
+        echo "As you are not a subscribed use, you charged 15% due to the administration fee!";
+    } else{
+        echo "As you are a subscribed use, you won't charged 15% administration fee!";
+    }
+    ?>
+    <br/>
+    <br/>
+    <h5>Coupon Expiry Date: <b><?=date('Y-m-d', $coupon->getExpiryDate())?></b></h5>
+    <br/>
+    <br/>
+    <h5>Please keep the Coupon ID safe to use it in your next purchase!</h5>
     <br/>
     <form method="get" action="index.php">
         <button type="submit" class="btn btn-primary">Return</button>
@@ -80,6 +95,3 @@
 </body>
 </html>
 
-<?php
-endif;
-?>
