@@ -1,4 +1,13 @@
 <?php
+    include_once "includes/loader.php";
+
+    if (isset($_POST["submit"])){
+        if (AuthenticationController::signUP($_POST['email'], $_POST["password"], $_POST["name"], $_POST["address"], $_POST["creditCardNumber"])){
+            redirect("loginPage.php");
+        } else{
+            $message = "Something went wrong! Please try again";
+        }
+    }
 
 ?>
 
@@ -23,7 +32,7 @@
 
                                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-                                    <form class="mx-1 mx-md-4">
+                                    <form class="mx-1 mx-md-4" method="post" action="signupPage.php">
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
@@ -44,7 +53,7 @@
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                <input type="email" name="address" id="form3Example3c" class="form-control" />
+                                                <input type="text" name="address" id="form3Example3c" class="form-control" />
                                                 <label class="form-label" for="form3Example3c">Address</label>
                                             </div>
                                         </div>
@@ -52,7 +61,7 @@
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                <input type="number" name="creditCard" id="form3Example3c" class="form-control" />
+                                                <input type="number" name="creditCardNumber" id="form3Example3c" class="form-control" />
                                                 <label class="form-label" for="form3Example3c">Credit Card Number</label>
                                             </div>
                                         </div>
@@ -66,10 +75,18 @@
                                         </div>
 
                                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <button type="button" class="btn btn-primary btn-lg">Register</button>
+                                            <button type="submit" name="submit" class="btn btn-primary btn-lg">Register</button>
                                         </div>
 
                                     </form>
+
+                                    <?php
+                                        if (isset($message)){
+                                            echo "<div class='alert alert-warning' role='alert'>
+                                                      $message 
+                                                   </div>";
+                                        }
+                                    ?>
 
                                 </div>
                                 <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">

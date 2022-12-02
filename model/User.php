@@ -5,14 +5,15 @@ abstract class User extends ModelsDatabase
 {
     protected $userId;
     protected $email;
+    protected $password = "";
     protected $name;
     protected $role;
-    protected $password = "";
 
-    public function __construct($userId, $email, $name, $role)
+    public function __construct($userId, $email, $password,  $name, $role)
     {
         $this->userId = $userId;
         $this->email = $email;
+        $this->password = $password;
         $this->name = $name;
         $this->role = $role;
     }

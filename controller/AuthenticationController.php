@@ -40,8 +40,13 @@ class AuthenticationController extends Controller
         }
     }
 
-    public static function signUP($name, $email, $address, $password){
-
+    public static function signUP($email, $password, $name, $address, $creditCardNumber ){
+        $user = new RegisteredUser(0, $email, $password, $name, "", $address, 0, 0, $creditCardNumber);
+        if ($user->dbCreate()){
+            return true;
+        } else{
+            return false;
+        }
     }
 
     public static function logOut(){

@@ -8,7 +8,7 @@ class RegisteredUser extends User
     private $expiryDate;
     private $creditCardNumber;
 
-    public function __construct($userId, $email,$password, $name, $role, $address, $feePayment, $expiryDate, $creditCardNumber)
+    public function __construct($userId, $email, $password, $name, $role, $address, $feePayment, $expiryDate, $creditCardNumber)
     {
         parent::__construct($userId, $email, $password, $name, $role);
         $this->address = $address;
@@ -25,7 +25,7 @@ class RegisteredUser extends User
     public function dbCreate()
     {
         $sql = "INSERT INTO ";
-        $sql .= "tickets (email, password, name, address, creditCardNumber)";
+        $sql .= "users (email, password, name, address, creditCardNumber)";
         $sql .= " VALUES ('$this->email', '$this->password', '$this->name', '$this->address', $this->creditCardNumber)";
         return self::create($sql);
     }
