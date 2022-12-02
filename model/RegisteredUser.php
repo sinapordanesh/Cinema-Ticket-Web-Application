@@ -44,7 +44,7 @@ class RegisteredUser extends User
     /**
      * @param mixed $feePayment
      */
-    public function setActivationFee($feePayment)
+    public function setFeePayment($feePayment)
     {
         $this->feePayment = $feePayment;
     }

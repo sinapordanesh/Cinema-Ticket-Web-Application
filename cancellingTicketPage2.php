@@ -1,6 +1,6 @@
 <?php
     include_once "includes/loader.php";
-    if (isset($_SESSION["login"])){
+    if (isset($_SESSION["login"]) && $_SESSION["subscribed"]){
         $user = true;
     } else{
         $user = false;
@@ -8,9 +8,10 @@
 
     $cc = new TicketCancellingController();
     $cc->searchTicketById($_SESSION["cancellationTicketId"]);
-    $ticket = TicketCancellingController::$ticket;
-    TicketCancellingController::couponCreation($ticket->getPrice(), $user);
-    $coupon = TicketCancellingController::$coupon;
+    $ticket = $cc->getTicket();
+    $cc->couponCreation($ticket->getPrice(), $user);
+    $coupon = $cc->getCoupon();
+    $cc->ticketDeleting();
 ?>
 
 <html>

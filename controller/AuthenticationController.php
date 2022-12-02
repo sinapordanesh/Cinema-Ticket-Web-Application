@@ -40,4 +40,10 @@ class AuthenticationController extends Controller
         }
     }
 
+    public static function logOut(){
+        unset($_SESSION["login"]);
+        unset($_SESSION["subscribed"]);
+        redirect("index.php");
+    }
+
 }

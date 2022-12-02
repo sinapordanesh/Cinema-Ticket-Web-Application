@@ -3,7 +3,6 @@
 class Singleton
 {
     private static $onlyInstance;
-    public  $salam;
     private $ticketsList;
     private $userObject;
 

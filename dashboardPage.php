@@ -7,6 +7,8 @@
         if (AuthenticationController::userObject($_SESSION["userQuery"])){
             $user = $singleton->getUserObject();
         }
+
+        $_SESSION["subscribed"] = $user->getFeePayment();
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +73,7 @@
                     </form>
                     <form action="">
                         <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
-                            <li class="nav-item"> <button type="submit" class="nav-link active btn btn-danger"> <i class="fas fa-credit-card mr-2"></i> Log Out </button> </li>
+                            <li class="nav-item"> <a type="submit" class="nav-link active btn btn-danger"> <i class="fas fa-credit-card mr-2"></i> Log Out </a> </li>
                         </ul>
                     </form>
 

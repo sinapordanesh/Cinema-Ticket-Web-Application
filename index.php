@@ -19,7 +19,7 @@ include_once "includes/loader.php"?>
     <div class="container vertical-center">
         <div class="text-center">
             <a href="loginPage.php">
-                <button class="btn btn-primary">Login</button>
+                <button class="btn btn-primary">Login-SignUp</button>
             </a>
             <a href="movieSearchPage.php">
                 <button class="btn btn-success">Movies Search</button>

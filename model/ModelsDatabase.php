@@ -28,5 +28,16 @@ class ModelsDatabase
         }
     }
 
+    public function delete($sql) {
+
+        global $database;
+
+        if ($database->query($sql)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }

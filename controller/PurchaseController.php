@@ -73,6 +73,14 @@ class PurchaseController extends Controller
             return false;
         }
     }
+
+    public static function couponDiscount($couponId){
+        $amount = 0;
+
+
+        return $amount;
+    }
+
     /**
      * @return mixed
      */

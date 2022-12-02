@@ -26,19 +26,19 @@ class Ticket extends ModelsDatabase
         $this->email = $email;
     }
 
-    public function dbGet()
-    {
-        // TODO: Implement dbGet() method.
-    }
-
     public function dbCreate()
     {
         $sql = "INSERT INTO ";
         $sql .= "tickets (uniqueId, userId, movie, theater, showTime, purchaseTime, seatNumber, price, email)";
         $sql .= " VALUES ($this->uniqueId, $this->userId, '$this->movie', '$this->theater', $this->showTime, $this->purchaseTime, '$this->seatNumber', $this->price, '$this->email')";
-//        die($sql);
         return self::create($sql);
+    }
 
+    public function dbDelete()
+    {
+        $sql = "DELETE FROM ";
+        $sql .= "tickets WHERE uniqueId=$this->uniqueId";
+        return self::delete($sql);
     }
 
     /**
