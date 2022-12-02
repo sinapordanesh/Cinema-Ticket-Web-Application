@@ -1,7 +1,29 @@
 <?php
-include_once "includes/loader.php";
+    include_once "includes/loader.php";
 
-$_SESSION["ticket"]["email"] = $_POST["email"];
+    if (isset($_POST["email"])){
+        $_SESSION["ticket"]["email"] = $_POST["email"];
+    }
+
+    if (isset($_POST["cancel"])){
+        unset($_SESSION["ticket"]);
+        redirect("index.php");
+    }
+
+    if (isset($_POST["cancel"])){
+        unset($_SESSION["ticket"]);
+        redirect("index.php");
+    }
+
+    if (isset($_POST["couponId"])){
+        $newPrice = PurchaseController::couponDiscount($_POST["couponId"], $_SESSION["ticket"]["price"]);
+        if ($newPrice){
+            $_SESSION["ticket"]["price"] = $newPrice;
+            $message = "Coupon successfully applied. Not usable anymore!";
+        } else{
+            $message = "The coupon is not applicable!";
+        }
+    }
 ?>
 
 
@@ -57,18 +79,40 @@ $_SESSION["ticket"]["email"] = $_POST["email"];
                             <li class="list-group-item">Theater: <b><?= $_SESSION["ticket"]["theater"]?></b></li>
                             <li class="list-group-item">Show Time: <b><?= @date('Y-m-d H:i', $_SESSION["ticket"]["showTime"])?></b></li>
                             <li class="list-group-item">Seat Number: <b><?= $_SESSION["ticket"]["seatNumber"]?></b></li>
-                            <li class="list-group-item">Price: <b><?= $_SESSION["ticket"]["price"]?></b></li>
+                            <li class="list-group-item">Price: $<b><?= round($_SESSION["ticket"]["price"], 2)?></b></li>
                             <li class="list-group-item">Costumer Email: <b><?= $_SESSION["ticket"]["email"]?></b></li>
                         </ul>
-
                         <br>
 
-                        <form method="post" action="paymentPage.php">
-                            <button type="submit" class="btn btn-success">Payment</button>
+                        <form method="post" action="checkoutPage.php">
+                            <div>
+                                <input type="text" name="couponId" class="form-control" id="inputPassword2" placeholder="Coupon Id">
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary mb-2">Apply Coupon</button>
                         </form>
+
+                        <?php
+                        if (isset($message)){
+                            echo "<div class='alert alert-warning' role='alert'>
+                                     $message
+                                </div>";
+                        }
+                        ?>
+
                         <br>
 
-                        <form method="post" action="index.php">
+<!--                        <form method="post" action="paymentPage.php">-->
+<!--                            <button type="submit" class="btn btn-success">Payment</button>-->
+<!--                        </form>-->
+
+                        <a type="submit" class="nav-link active btn btn-success" href="paymentPage.php?action=successPage.php"> <i class="fas fa-credit-card mr-2"></i> Payment </a>
+                        <br>
+
+                        <br>
+
+                        <form method="post" action="checkoutPage.php">
+                                <input type="text" name="cancel" hidden>
                                 <button type="submit" class="btn btn-danger">Cancel</button>
                         </form>
                     </div>

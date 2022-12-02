@@ -33,9 +33,9 @@ require_once("view/UserInterface.php");
 
 
 
-function redirect($location)
+function redirect($location, $get = "")
 {
-    header("Location: {$location}");
+    header("Location: {$location}" . $get);
 }
 
 $salam = "salam";

@@ -18,9 +18,56 @@ abstract class User extends ModelsDatabase
         $this->role = $role;
     }
 
-    abstract public function dbGet();
+    public static function dbGet($userId, $email = "", $password = ""){
+        global $database;
+        if (!empty($email) && !empty($password)){
+            $email = $database->escape_string($email);
+            $password = $database->escape_string($password);
+
+            $sql = "SELECT * FROM users WHERE ";
+            $sql .= "email = '{$email}' ";
+            $sql .= "AND password = '{$password}' ";
+            $sql .= "LIMIT 1";
+
+            $the_result_array = self::find_this_query($sql);
+            if (!empty($the_result_array)){
+                $query = array_shift($the_result_array);
+            } else{
+                return false;
+            }
+        } else{
+            $userId = $database->escape_string($userId);
+
+            $sql = "SELECT * FROM users WHERE ";
+            $sql .= "id = '{$userId}' ";
+            $sql .= "LIMIT 1";
+
+            $the_result_array = self::find_this_query($sql);
+            if (!empty($the_result_array)){
+                $query = array_shift($the_result_array);
+            } else{
+                return false;
+            }
+        }
+
+        if(!empty($query)){
+
+            if ($query["role"] == "registered"){
+                $user = new RegisteredUser($query["id"], $query["email"], $query["password"], $query["name"], $query["role"],$query["address"], $query["feePayment"], $query["expiryDate"], $query["creditCardNumber"]);
+            } else{
+
+            }
+            global $singleton;
+            $singleton->setUserObject($user);
+            return true;
+        } else{
+            return false;
+        }
+    }
 
     abstract public function dbCreate();
+    abstract public function dbUpdate($updateType);
+
 
     /**
      * @return mixed

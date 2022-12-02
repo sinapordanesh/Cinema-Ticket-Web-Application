@@ -74,11 +74,20 @@ class PurchaseController extends Controller
         }
     }
 
-    public static function couponDiscount($couponId){
-        $amount = 0;
-
-
-        return $amount;
+    public static function couponDiscount($uniqueId, $ticketPrice){
+        $result = self::find_this_query("SELECT * FROM coupon WHERE uniqueId = '$uniqueId'");
+        if (!empty($result)){
+            $coupon = new Coupon($result[0]["uniqueId"], $result[0]["amount"], $result[0]["expiryDate"]);
+            if ($coupon->getAmount() > $ticketPrice){
+                return false;
+            } else{
+                $return = $ticketPrice - $coupon->getAmount();
+                $coupon->dbDelete();
+                return $return;
+            }
+        } else{
+            return false;
+        }
     }
 
     /**

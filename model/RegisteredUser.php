@@ -17,10 +17,6 @@ class RegisteredUser extends User
         $this->creditCardNumber = $creditCardNumber;
     }
 
-    public function dbGet()
-    {
-        // TODO: Implement dbGet() method.
-    }
 
     public function dbCreate()
     {
@@ -28,6 +24,24 @@ class RegisteredUser extends User
         $sql .= "users (email, password, name, address, creditCardNumber)";
         $sql .= " VALUES ('$this->email', '$this->password', '$this->name', '$this->address', $this->creditCardNumber)";
         return self::create($sql);
+    }
+
+    public function dbUpdate($updateType)
+    {
+        if ($updateType == "feePayment"){
+            $nextYear = time() + 31536000;
+            $sql = "UPDATE users";
+            $sql .= " SET feePayment = 1, expiryDate = $nextYear";
+            $sql .= " WHERE id = $this->userId;";
+//            die($sql);
+            if (self::update($sql)){
+                $this->feePayment = 1;
+                $this->expiryDate = $nextYear;
+                return true;
+            } else{
+                return false;
+            }
+        }
     }
 
     /**

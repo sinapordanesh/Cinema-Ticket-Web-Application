@@ -2,13 +2,20 @@
     include_once "includes/loader.php";
 
     if ($_SESSION["login"]):
-
+        $dc = new DashboardController();
+        $dc->userLoad();
         global $singleton;
-        if (AuthenticationController::userObject($_SESSION["userQuery"])){
-            $user = $singleton->getUserObject();
+        $user = $singleton->getUserObject();
+        $_SESSION["subscribed"] = $user->getFeePayment();
+
+        if (isset($_GET["action"]) && $_GET["action"] == "logout"){
+            AuthenticationController::logOut();
         }
 
-        $_SESSION["subscribed"] = $user->getFeePayment();
+        if (isset($_POST["feePayment"])){
+            $dc->feePayment();
+        }
+
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +62,7 @@
                                     <br>
                                     <ul class="list-group">
                                         <li class="list-group-item">Fee Payment: <b><?= ($user->getFeePayment() == 0) ? "Not Paid!!" : "Paid" ?></b></li>
-                                        <li class="list-group-item">Expiry Date: <b><?= ($user->getFeePayment() == 0) ? "N/A" : $user->getExpiryDate()?></b></li>
+                                        <li class="list-group-item">Expiry Date: <b><?= ($user->getFeePayment() == 0) ? "N/A" : date('Y-m-d',$user->getExpiryDate())?></b></li>
                                     </ul>
 
                                 </li>
@@ -66,16 +73,27 @@
                 </div>
                 <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
                     <!-- Credit card form tabs -->
-                    <form action="">
+
+                    <?php
+                        if ($user->getFeePayment() == 0):
+                    ?>
+                    <form action="dashboardPage.php" method="post">
+                        <input name="feePayment" hidden></input>
                         <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
-                            <li class="nav-item"> <button data-toggle="pill" href="#credit-card" class="nav-link active btn-success" <?= ($user->getFeePayment() == 1) ? "disabled" : "" ?>> <i class="fas fa-credit-card mr-2"></i> Pay the $20 subscription fee </button> </li>
+                            <li class="nav-item">
+                                <button type="submit" name="submit" class="nav-link active btn-success">Pay the $20 subscription fe</button>
+                            </li>
                         </ul>
                     </form>
-                    <form action="">
+
+                    <?php
+                        endif;
+                    ?>
+
                         <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
-                            <li class="nav-item"> <a type="submit" class="nav-link active btn btn-danger"> <i class="fas fa-credit-card mr-2"></i> Log Out </a> </li>
+                            <li class="nav-item"> <a type="submit" class="nav-link active btn btn-danger" href="dashboardPage.php?action=logout"> <i class="fas fa-credit-card mr-2"></i> Log Out </a> </li>
+                            <li class="nav-item"> <a type="submit" class="nav-link active btn btn-primary" href="index.php"> <i class="fas fa-credit-card mr-2"></i> Main Page </a> </li>
                         </ul>
-                    </form>
 
                 </div> <!-- End -->
 

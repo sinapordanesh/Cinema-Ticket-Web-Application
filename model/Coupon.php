@@ -14,10 +14,6 @@ class Coupon extends ModelsDatabase
         $this->expiryDate = $expiryDate;
     }
 
-    public function dbGet()
-    {
-        // TODO: Implement dbGet() method.
-    }
 
     public function dbCreate()
     {
@@ -27,6 +23,13 @@ class Coupon extends ModelsDatabase
 //        die($sql);
         return self::create($sql);
 
+    }
+
+    public function dbDelete()
+    {
+        $sql = "DELETE FROM ";
+        $sql .= "coupon WHERE uniqueId=$this->uniqueId";
+        return self::delete($sql);
     }
 
     /**

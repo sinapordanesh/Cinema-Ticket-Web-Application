@@ -2,28 +2,18 @@
 
     include_once "includes/loader.php";
 
+    if (isset($_SESSION['login']) && $_SESSION['login']){
+        redirect("dashboardPage.php");
+    }
+
     if(isset($_POST['submit']))
     {
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
 
-        $userFound = AuthenticationController::verifyUser($email, $password);
-
-        if($userFound)
-        {
-            $_SESSION["login"] = true;
-            $_SESSION["userQuery"] = $userFound;
-            redirect("dashboardPage.php");
-        }
-        else
-        {
+        if (!AuthenticationController::verifyUser($email, $password)){
             $message = "your password or email address are incorrect";
         }
-    }
-    else
-    {
-        $username = '';
-        $password = '';
     }
 ?>
 
