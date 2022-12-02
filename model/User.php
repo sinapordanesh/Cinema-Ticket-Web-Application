@@ -3,10 +3,11 @@ require_once ("ModelsDatabase.php");
 
 abstract class User extends ModelsDatabase
 {
-    private $userId;
-    private $email;
-    private $name;
-    private $role;
+    protected $userId;
+    protected $email;
+    protected $name;
+    protected $role;
+    protected $password = "";
 
     public function __construct($userId, $email, $name, $role)
     {
@@ -16,15 +17,9 @@ abstract class User extends ModelsDatabase
         $this->role = $role;
     }
 
-    public function dbGet()
-    {
-        // TODO: Implement dbGet() method.
-    }
+    abstract public function dbGet();
 
-    public function dbSet()
-    {
-        // TODO: Implement dbSet() method.
-    }
+    abstract public function dbCreate();
 
     /**
      * @return mixed

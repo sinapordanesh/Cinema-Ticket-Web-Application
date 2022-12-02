@@ -8,13 +8,26 @@ class RegisteredUser extends User
     private $expiryDate;
     private $creditCardNumber;
 
-    public function __construct($userId, $email, $name, $role, $address, $feePayment, $expiryDate, $creditCardNumber)
+    public function __construct($userId, $email,$password, $name, $role, $address, $feePayment, $expiryDate, $creditCardNumber)
     {
-        parent::__construct($userId, $email, $name, $role);
+        parent::__construct($userId, $email, $password, $name, $role);
         $this->address = $address;
         $this->feePayment = $feePayment;
         $this->expiryDate = $expiryDate;
         $this->creditCardNumber = $creditCardNumber;
+    }
+
+    public function dbGet()
+    {
+        // TODO: Implement dbGet() method.
+    }
+
+    public function dbCreate()
+    {
+        $sql = "INSERT INTO ";
+        $sql .= "tickets (email, password, name, address, creditCardNumber)";
+        $sql .= " VALUES ('$this->email', '$this->password', '$this->name', '$this->address', $this->creditCardNumber)";
+        return self::create($sql);
     }
 
     /**
@@ -80,4 +93,6 @@ class RegisteredUser extends User
     {
         $this->creditCardNumber = $creditCardNumber;
     }
+
+
 }

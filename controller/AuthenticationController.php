@@ -27,7 +27,7 @@ class AuthenticationController extends Controller
         if(!empty($userQuery)){
             $item = $userQuery;
             if ($item["role"] == "registered"){
-                $user = new RegisteredUser($item["id"], $item["email"], $item["name"], $item["role"],$item["address"], $item["feePayment"], $item["expiryDate"], $item["creditCardNumber"]);
+                $user = new RegisteredUser($item["id"], $item["email"], $item["password"], $item["name"], $item["role"],$item["address"], $item["feePayment"], $item["expiryDate"], $item["creditCardNumber"]);
             } else{
 
             }
@@ -38,6 +38,10 @@ class AuthenticationController extends Controller
         } else{
             return false;
         }
+    }
+
+    public static function signUP($name, $email, $address, $password){
+
     }
 
     public static function logOut(){
