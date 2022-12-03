@@ -4,7 +4,6 @@ require_once ("Observer.php");
 
 class DashboardController extends Controller implements Observer
 {
-
     private $user;
     private $news = array();
 

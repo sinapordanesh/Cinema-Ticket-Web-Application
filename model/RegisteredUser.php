@@ -17,7 +17,6 @@ class RegisteredUser extends User
         $this->creditCardNumber = $creditCardNumber;
     }
 
-
     public function dbCreate()
     {
         $sql = "INSERT INTO ";

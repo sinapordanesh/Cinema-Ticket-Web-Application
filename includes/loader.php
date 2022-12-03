@@ -22,16 +22,6 @@ require_once("controller/PurchaseController.php");
 require_once("controller/TicketCancellingController.php");
 require_once("database/Database.php");
 require_once("database/db_object.php");
-require_once("view/CheckOutPage.php");
-require_once("view/GraphicalSeats.php");
-require_once("view/LoginPage.php");
-require_once("view/MoviesPage.php");
-require_once("view/PaymentPage.php");
-require_once("view/SignUpPage.php");
-require_once("view/TicketCancellingPage.php");
-require_once("view/UserDashboardPage.php");
-require_once("view/UserInterface.php");
-
 
 
 function redirect($location, $get = "")

@@ -16,11 +16,6 @@ class Seat extends ModelsDatabase
         $this->available = $available;
     }
 
-    public function dbGet()
-    {
-        // TODO: Implement dbGet() method.
-    }
-
     public static function dbUpdateAvailability($seatId, $theater, $showTime, $status)
     {
         $sql = "UPDATE seats";

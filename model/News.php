@@ -4,7 +4,7 @@ require_once ("ModelsDatabase.php");
 require_once ("Subject.php");
 
 
-class News extends ModelsDatabase implements Subject
+class News extends ModelsDatabase
 {
     private $title;
     private $content;
@@ -15,31 +15,6 @@ class News extends ModelsDatabase implements Subject
         $this->title = $title;
         $this->content = $content;
         $this->date = $date;
-    }
-
-    public function dbGet()
-    {
-        // TODO: Implement dbGet() method.
-    }
-
-    public function dbSet()
-    {
-        // TODO: Implement dbSet() method.
-    }
-
-    public function registerObserver($observer)
-    {
-        // TODO: Implement registerObserver() method.
-    }
-
-    public function removeObserver($observer)
-    {
-        // TODO: Implement removeObserver() method.
-    }
-
-    public function notifyAllObservers()
-    {
-        // TODO: Implement notifyAllObservers() method.
     }
 
     /**

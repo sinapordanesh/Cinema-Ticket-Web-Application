@@ -33,7 +33,6 @@ class NewsController extends Controller implements Subject
         }
     }
 
-
     /**
      * @return array
      */

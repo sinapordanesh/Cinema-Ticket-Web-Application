@@ -42,26 +42,8 @@ class Db_object {
             }
 
         }
-
-        /* $the_object->id = $found_user['id'];
-         $the_object->username = $found_user['username'];
-         $the_object->password = $found_user['password'];
-         $the_object->first_name = $found_user['first_name'];
-         $the_object->last_name = $found_user['last_name'];   */
         return $the_object;
     }
-
-
-
-    private function has_the_attribute($the_attribute) {
-
-        $object_properties = get_object_vars($this);
-
-        return array_key_exists($the_attribute, $object_properties);
-
-    }
-
-
 
     protected function properties() {
 
@@ -88,14 +70,6 @@ class Db_object {
         }
         return $clean_properties;
     }
-
-
-
-    public function save() {
-        return isset($this->id) ? $this->update() : $this->create();
-
-    }
-
 
     public function create() {
         global $database;
@@ -137,23 +111,6 @@ class Db_object {
         $database->query($sql);
 
         return (mysqli_affected_rows($database->connection) == 1) ? true : false;
-
-
-    }
-
-    public function delete()
-    {
-
-        global $database;
-
-        $sql = "DELETE FROM " . static::$db_table . " ";
-        $sql .= "WHERE id = " . $database->escape_string($this->id);
-        $sql .= " LIMIT 1";
-
-        $database->query($sql);
-
-        return (mysqli_affected_rows($database->connection) == 1) ? true : false;
-
     }
 }
 

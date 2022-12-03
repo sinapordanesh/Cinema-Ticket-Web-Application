@@ -16,17 +16,6 @@ class Theater extends ModelsDatabase
         $this->dbGetSeats();
     }
 
-
-    public function dbGet()
-    {
-        // TODO: Implement dbGet() method.
-    }
-
-    public function dbSet()
-    {
-        // TODO: Implement dbSet() method.
-    }
-
     private function dbGetSeats()
     {
         $result = self::find_this_query("SELECT * FROM seats WHERE theater='$this->name' AND showTime='$this->showTime'");
