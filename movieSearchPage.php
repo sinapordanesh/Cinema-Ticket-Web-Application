@@ -4,6 +4,9 @@
 
     $movieController = new MovieSearchController();
     @$movieController->searchMovieByName($_GET["search"]);
+    unset($_SESSION["selectedTheater"]);
+    unset($_SESSION["selectedTime"]);
+    unset($_SESSION["selectedSeat"]);
 
 ?>
 
