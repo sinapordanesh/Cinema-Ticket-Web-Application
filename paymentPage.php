@@ -59,7 +59,7 @@ include_once "includes/loader.php";
                                 <div class="form-group"> <label for="cardNumber">
                                         <h6>Card number</h6>
                                     </label>
-                                    <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control" value="<?=$user->getCreditCardNumber()?>" required>
+                                    <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control" value="<?= isset($user) ? $user->getCreditCardNumber() : '' ?>" required>
                                         <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
                                     </div>
                                 </div>

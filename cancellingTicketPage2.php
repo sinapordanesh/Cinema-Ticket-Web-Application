@@ -77,9 +77,9 @@
     <h5>Coupon Amount: $<b><?=round($coupon->getAmount(), 2)?></b></h5>
     <?php
     if (!$user){
-        echo "As you are not a subscribed use, you charged 15% due to the administration fee!";
+        echo "As you are not a subscribed user, you charged 15% due to the administration fee!";
     } else{
-        echo "As you are a subscribed use, you won't charged 15% administration fee!";
+        echo "As you are a subscribed user, you won't charged 15% administration fee!";
     }
     ?>
     <br/>

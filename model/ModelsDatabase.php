@@ -20,7 +20,6 @@ class ModelsDatabase
     public function create($sql)
     {
         global $database;
-
         if ($database->query($sql)) {
             return true;
         } else {
