@@ -8,6 +8,11 @@
         $user = $singleton->getUserObject();
         $_SESSION["subscribed"] = $user->getFeePayment();
 
+        // news section
+        $nc = new NewsController();
+        $nc->getAllNews();
+        $nc->registerObserver($dc);
+
         if (isset($_GET["action"]) && $_GET["action"] == "logout"){
             AuthenticationController::logOut();
         }
@@ -98,7 +103,39 @@
                 </div> <!-- End -->
 
             </div>
-        </div>
+
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+            <div class="card-header">
+                <!-- Credit card form content -->
+                <div class="tab-content">
+                    <!-- credit card info-->
+                    <div id="credit-card" class="tab-pane fade show active pt-3">
+                        <ul class="list-group">
+                            <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3">News of the day</span>
+                            <?php
+                            $news = $dc->getNews();
+                            foreach ($news as $new):
+                            ?>
+                            <li>
+                                <div class="row ">
+                                    <div class="">
+                                        <h4><strong><?=$new->getTitle()?></strong></h4>
+                                        <p class="text-muted">
+                                            <?=$new->getContent()?>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <?php
+                            endforeach;
+                            ?>
+                        </ul>
+                        <a href="https://www.hollywoodreporter.com/c/movies/movie-news/" target="_blank" class="btn btn-primary">Read more</a>
+                    </div>
+                </div>
+            </div>
 </body>
 </html>
 

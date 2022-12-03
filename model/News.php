@@ -9,14 +9,12 @@ class News extends ModelsDatabase implements Subject
     private $title;
     private $content;
     private $date;
-    private $observers;
 
-    public function __construct($title, $content, $date, $observers)
+    public function __construct($title, $content, $date)
     {
         $this->title = $title;
         $this->content = $content;
         $this->date = $date;
-        $this->observers = $observers;
     }
 
     public function dbGet()

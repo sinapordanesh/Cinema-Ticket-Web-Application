@@ -15,6 +15,7 @@ require_once("model/Ticket.php");
 require_once("model/User.php");
 require_once("controller/AuthenticationController.php");
 require_once("controller/Controller.php");
+require_once("controller/NewsController.php");
 require_once("controller/DashboardController.php");
 require_once("controller/MovieSearchController.php");
 require_once("controller/PurchaseController.php");

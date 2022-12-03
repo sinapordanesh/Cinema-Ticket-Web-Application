@@ -6,7 +6,7 @@ class DashboardController extends Controller implements Observer
 {
 
     private $user;
-    private $news;
+    private $news = array();
 
     public function userLoad(){
         global $singleton;
@@ -20,9 +20,9 @@ class DashboardController extends Controller implements Observer
         redirect("paymentPage.php", "?action=dashboardPage.php");
     }
 
-    public function update($update)
+    public function update($news)
     {
-
+        $this->news = $news;
     }
 
     /**
