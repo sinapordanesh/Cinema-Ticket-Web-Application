@@ -43,18 +43,17 @@
             <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th class="th-sm">Name
-                    </th>
-                    <th class="th-sm">Price
-                    </th>
-                    <th class="th-sm">Release Date
-                    </th>
+                    <th class="th-sm">Name</th>
+                    <th class="th-sm">Price</th>
+                    <th class="th-sm">Release Date</th>
+                    <th class="th-sm">Status</th>
                 </tr>
 
                 <tbody>
 
                 <?php
                 foreach ($movies as $movie):
+                    if ($movie->getAvailable() == 1):
                 ?>
                 <tr>
                     <td>
@@ -62,10 +61,25 @@
                             <?= $movie->getName(); ?>
                         </a>
                     </td>
-                    <td>$ <?= number_format($movie->getPrice(),2,'.','');?></td>
+                    <td>$<?= number_format($movie->getPrice(),2,'.','');?></td>
                     <td><?= date('m/d/Y', $movie->getReleaseDate()); ?></td>
+                    <td>Public</td>
                 </tr>
                 <?php
+                elseif ($movie->getAvailable() == 0 && isset($_SESSION["subscribed"]) && $_SESSION["subscribed"]):
+                    ?>
+                    <tr>
+                        <td>
+                            <a href="moviePage.php?movie=<?= $movie->getName();?>" methods="get">
+                                <?= $movie->getName(); ?>
+                            </a>
+                        </td>
+                        <td>$<?= number_format($movie->getPrice(),2,'.','');?></td>
+                        <td><?= date('m/d/Y', $movie->getReleaseDate()); ?></td>
+                        <td>Subscribers</td>
+                    </tr>
+                <?php
+                endif;
                 endforeach;
                 ?>
                 </tbody>

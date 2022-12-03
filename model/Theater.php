@@ -88,8 +88,15 @@ class Theater extends ModelsDatabase
     /**
      * @return mixed
      */
-    public function getSeats()
+    public function getSeats($availability)
     {
+        $sizeOfSeats = sizeof($this->seats);
+        if ($availability == 0){
+            for ($i = 0; $i < ($sizeOfSeats * 0.9); $i++){
+                unset($this->seats[$i]);
+            }
+        }
+
         return $this->seats;
     }
 

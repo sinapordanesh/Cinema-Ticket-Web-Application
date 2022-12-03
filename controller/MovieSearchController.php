@@ -13,7 +13,7 @@ class MovieSearchController extends Controller
         }
 
         foreach ($result as $item){
-            $this->moviesList [] = new Movie($item["name"], $item["price"], $item["releaseDate"]);
+            $this->moviesList [] = new Movie($item["name"], $item["price"], $item["releaseDate"], $item['available']);
         }
     }
 

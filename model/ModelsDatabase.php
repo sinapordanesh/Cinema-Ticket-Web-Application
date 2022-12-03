@@ -27,9 +27,10 @@ class ModelsDatabase
         }
     }
 
-    public function update($sql)
+    public static function update($sql)
     {
         global $database;
+//        die($sql);
 
         if ($database->query($sql)) {
             return true;

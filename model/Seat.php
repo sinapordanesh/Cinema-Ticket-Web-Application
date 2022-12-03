@@ -21,9 +21,17 @@ class Seat extends ModelsDatabase
         // TODO: Implement dbGet() method.
     }
 
-    public function dbSet()
+    public static function dbUpdateAvailability($seatId, $theater, $showTime, $status)
     {
-        // TODO: Implement dbSet() method.
+        $sql = "UPDATE seats";
+        $sql .= " SET available = $status";
+        $sql .= " WHERE seatId = '$seatId' AND theater = '$theater' AND showTime = $showTime;";
+
+        if (self::update($sql)){
+            return true;
+        } else{
+            return false;
+        }
     }
 
     /**

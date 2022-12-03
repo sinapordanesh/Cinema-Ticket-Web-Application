@@ -11,7 +11,7 @@ class PurchaseController extends Controller
         $result = self::find_this_query("SELECT * FROM movies WHERE name LIKE '%$name%'");
 
         if (!empty($result)){
-            $this->movie = new Movie($result[0]["name"], $result[0]["price"], $result[0]["releaseDate"]);
+            $this->movie = new Movie($result[0]["name"], $result[0]["price"], $result[0]["releaseDate"], $result[0]["available"]);
         } else{
             echo "No movie found!";
         }

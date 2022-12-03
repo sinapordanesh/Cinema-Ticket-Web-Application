@@ -141,7 +141,9 @@
                                     <div class="row">
                                             <?php
                                             $selectedTheaterObject = $selectedTheater[$_SESSION["selectedTime"]];
-                                            foreach ($selectedTheaterObject->getSeats() as $seat):
+//                                            die($pc->getMovie()->getAvailable());
+                                            $seats = $selectedTheaterObject->getSeats($pc->getMovie()->getAvailable());
+                                            foreach ($seats as $seat):
                                                 if ($seat->getAvailable()):
                                                     ?>
                                                     <a href="./moviePage.php?movie=<?=$_GET["movie"]?>&seatId=<?=$seat->getSeatId()?>" class="seat"></a>

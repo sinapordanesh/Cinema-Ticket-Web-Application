@@ -33,7 +33,7 @@ class RegisteredUser extends User
             $sql = "UPDATE users";
             $sql .= " SET feePayment = 1, expiryDate = $nextYear";
             $sql .= " WHERE id = $this->userId;";
-//            die($sql);
+
             if (self::update($sql)){
                 $this->feePayment = 1;
                 $this->expiryDate = $nextYear;

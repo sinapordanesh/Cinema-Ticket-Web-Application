@@ -9,6 +9,11 @@
     if ($ticketCreation):
         PurchaseController::emailSender();
 
+        unset($_SESSION["selectedTheater"]);
+        unset($_SESSION["selectedTime"]);
+        unset($_SESSION["selectedSeat"]);
+        unset($_SESSION["ticket"]);
+
 ?>
 
 <html>

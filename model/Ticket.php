@@ -31,14 +31,14 @@ class Ticket extends ModelsDatabase
         $sql = "INSERT INTO ";
         $sql .= "tickets (uniqueId, userId, movie, theater, showTime, purchaseTime, seatNumber, price, email)";
         $sql .= " VALUES ($this->uniqueId, $this->userId, '$this->movie', '$this->theater', $this->showTime, $this->purchaseTime, '$this->seatNumber', $this->price, '$this->email')";
-        return self::create($sql);
+        return self::create($sql) && Seat::dbUpdateAvailability($this->seatNumber, $this->theater, $this->showTime, 0);;
     }
 
     public function dbDelete()
     {
         $sql = "DELETE FROM ";
         $sql .= "tickets WHERE uniqueId=$this->uniqueId";
-        return self::delete($sql);
+        return self::delete($sql) && Seat::dbUpdateAvailability($this->seatNumber, $this->theater, $this->showTime, 1);;
     }
 
     /**

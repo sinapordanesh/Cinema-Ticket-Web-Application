@@ -7,13 +7,15 @@ class Movie extends ModelsDatabase
     private $name;
     private $price;
     private $releaseDate;
+    private $available;
     private $theaters = array();
 
-    public function __construct($title, $price, $releaseDate)
+    public function __construct($title, $price, $releaseDate, $available)
     {
         $this->name = $title;
         $this->price = $price;
         $this->releaseDate = $releaseDate;
+        $this->available = $available;
     }
 
     public function dbGet()
@@ -90,12 +92,20 @@ class Movie extends ModelsDatabase
         $this->theaters = $theaters;
     }
 
-    public function dbGetTable(){
-
+    /**
+     * @return mixed
+     */
+    public function getAvailable()
+    {
+        return $this->available;
     }
 
-    public function dbSetTable(){
-
+    /**
+     * @param mixed $available
+     */
+    public function setAvailable($available)
+    {
+        $this->available = $available;
     }
 
 

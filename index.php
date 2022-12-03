@@ -1,7 +1,12 @@
 <?php
-ini_set('error_reporting', E_ALL);
-ini_set( 'display_errors', 1 );
-include_once "includes/loader.php"?>
+
+    include_once "includes/loader.php";
+    unset($_SESSION["selectedTheater"]);
+    unset($_SESSION["selectedTime"]);
+    unset($_SESSION["selectedSeat"]);
+    unset($_SESSION["ticket"]);
+
+?>
 
 <!doctype html>
 <html lang="en">
