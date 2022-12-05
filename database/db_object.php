@@ -1,13 +1,23 @@
 <?php
 
+/**
+ *
+ */
 class Db_object {
 
+    /**
+     * @return array
+     */
     public static function find_all() {
 
         return static::find_by_query("SELECT * FROM ". static::$db_table. " ");
 
     }
 
+    /**
+     * @param $id
+     * @return false|mixed|null
+     */
     public static function find_by_id($id) {
         $the_result_array = static::find_by_query("SELECT * FROM ". static::$db_table." WHERE id={$id} LIMIT 1");
 
@@ -16,6 +26,10 @@ class Db_object {
 
     }
 
+    /**
+     * @param $sql
+     * @return array
+     */
     public static function find_by_query($sql) {
         global $database;
         $result_set = $database->query($sql);
@@ -31,6 +45,10 @@ class Db_object {
 
     }
 
+    /**
+     * @param $the_record
+     * @return mixed
+     */
     public static function instantation($the_record){
 
         $calling_class = get_called_class();
@@ -45,6 +63,9 @@ class Db_object {
         return $the_object;
     }
 
+    /**
+     * @return array
+     */
     protected function properties() {
 
         //return get_object_vars();
@@ -62,6 +83,9 @@ class Db_object {
 
     }
 
+    /**
+     * @return array
+     */
     protected function clean_properties() {
         global $database;
         $clean_properties = array();
@@ -71,6 +95,9 @@ class Db_object {
         return $clean_properties;
     }
 
+    /**
+     * @return bool
+     */
     public function create() {
         global $database;
 
@@ -92,6 +119,9 @@ class Db_object {
 
     }
 
+    /**
+     * @return bool
+     */
     public function update() {
         global $database;
 

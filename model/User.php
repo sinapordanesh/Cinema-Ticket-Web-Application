@@ -3,13 +3,35 @@ require_once ("ModelsDatabase.php");
 
 abstract class User extends ModelsDatabase
 {
+    /**
+     * @var
+     */
     protected $userId;
+    /**
+     * @var
+     */
     protected $email;
+    /**
+     * @var string
+     */
     protected $password = "";
+    /**
+     * @var
+     */
     protected $name;
+    /**
+     * @var
+     */
     protected $role;
 
-    public function __construct($userId, $email, $password,  $name, $role)
+    /**
+     * @param $userId
+     * @param $email
+     * @param $password
+     * @param $name
+     * @param $role
+     */
+    public function __construct($userId, $email, $password, $name, $role)
     {
         $this->userId = $userId;
         $this->email = $email;
@@ -18,6 +40,12 @@ abstract class User extends ModelsDatabase
         $this->role = $role;
     }
 
+    /**
+     * @param $userId
+     * @param $email
+     * @param $password
+     * @return bool
+     */
     public static function dbGet($userId, $email = "", $password = ""){
         global $database;
         if (!empty($email) && !empty($password)){
@@ -65,7 +93,15 @@ abstract class User extends ModelsDatabase
         }
     }
 
+    /**
+     * @return mixed
+     */
     abstract public function dbCreate();
+
+    /**
+     * @param $updateType
+     * @return mixed
+     */
     abstract public function dbUpdate($updateType);
 
 

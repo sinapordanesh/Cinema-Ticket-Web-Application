@@ -3,8 +3,15 @@ require_once ("Controller.php");
 
 class MovieSearchController extends Controller
 {
+    /**
+     * @var array
+     */
     private $moviesList = array();
 
+    /**
+     * @param $name
+     * @return void
+     */
     public function searchMovieByName($name = ""){
         if ($name == ""){
             $result = self::find_this_query("SELECT * FROM movies");

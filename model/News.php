@@ -4,12 +4,29 @@ require_once ("ModelsDatabase.php");
 require_once ("Subject.php");
 
 
+/**
+ *
+ */
 class News extends ModelsDatabase
 {
+    /**
+     * @var
+     */
     private $title;
+    /**
+     * @var
+     */
     private $content;
+    /**
+     * @var
+     */
     private $date;
 
+    /**
+     * @param $title
+     * @param $content
+     * @param $date
+     */
     public function __construct($title, $content, $date)
     {
         $this->title = $title;

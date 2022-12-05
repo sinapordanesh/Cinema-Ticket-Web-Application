@@ -2,14 +2,38 @@
 
 require_once ("ModelsDatabase.php");
 
+/**
+ *
+ */
 class Movie extends ModelsDatabase
 {
+    /**
+     * @var
+     */
     private $name;
+    /**
+     * @var
+     */
     private $price;
+    /**
+     * @var
+     */
     private $releaseDate;
+    /**
+     * @var
+     */
     private $available;
+    /**
+     * @var array
+     */
     private $theaters = array();
 
+    /**
+     * @param $title
+     * @param $price
+     * @param $releaseDate
+     * @param $available
+     */
     public function __construct($title, $price, $releaseDate, $available)
     {
         $this->name = $title;
@@ -18,11 +42,17 @@ class Movie extends ModelsDatabase
         $this->available = $available;
     }
 
+    /**
+     * @return void
+     */
     public function dbGet()
     {
         // TODO: Implement dbGet() method.
     }
 
+    /**
+     * @return void
+     */
     public function dbSet()
     {
         // TODO: Implement dbSet() method.

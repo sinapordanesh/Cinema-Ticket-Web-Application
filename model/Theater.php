@@ -3,11 +3,28 @@ require_once ("ModelsDatabase.php");
 
 class Theater extends ModelsDatabase
 {
+    /**
+     * @var
+     */
     private $name;
+    /**
+     * @var
+     */
     private $currentMovie;
+    /**
+     * @var
+     */
     private $showTime;
+    /**
+     * @var array
+     */
     private $seats = array();
 
+    /**
+     * @param $name
+     * @param $currentMovie
+     * @param $showTime
+     */
     public function __construct($name, $currentMovie, $showTime)
     {
         $this->name = $name;
@@ -16,6 +33,9 @@ class Theater extends ModelsDatabase
         $this->dbGetSeats();
     }
 
+    /**
+     * @return void
+     */
     private function dbGetSeats()
     {
         $result = self::find_this_query("SELECT * FROM seats WHERE theater='$this->name' AND showTime='$this->showTime'");

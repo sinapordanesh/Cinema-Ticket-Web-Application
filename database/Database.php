@@ -5,12 +5,22 @@ require_once('config.php');
 
 class Database
 {
+    /**
+     * @var
+     */
     public $connection;
+
+    /**
+     *
+     */
     function __construct()
     {
         $this->open_db_connection();
     }
 
+    /**
+     * @return void
+     */
     public function open_db_connection()
     {
         $this->connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
@@ -21,6 +31,10 @@ class Database
         }
     }
 
+    /**
+     * @param $sql
+     * @return bool|mysqli_result
+     */
     public function query($sql)
     {
         $result = mysqli_query($this->connection, $sql);
@@ -28,6 +42,10 @@ class Database
         return $result;
     }
 
+    /**
+     * @param $result
+     * @return void
+     */
     private function confirm_query($result)
     {
         if(!$result)
@@ -36,6 +54,10 @@ class Database
         }
     }
 
+    /**
+     * @param $string
+     * @return string
+     */
     public function escape_string($string)
     {
         $escaped_string = mysqli_real_escape_string($this->connection, $string);

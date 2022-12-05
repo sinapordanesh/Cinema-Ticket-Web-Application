@@ -2,6 +2,10 @@
 
 class ModelsDatabase
 {
+    /**
+     * @param $sql
+     * @return array
+     */
     public static function find_this_query($sql)
     {
         global $database;
@@ -17,6 +21,10 @@ class ModelsDatabase
         return $the_object_array;
     }
 
+    /**
+     * @param $sql
+     * @return bool
+     */
     public function create($sql)
     {
         global $database;
@@ -27,6 +35,10 @@ class ModelsDatabase
         }
     }
 
+    /**
+     * @param $sql
+     * @return bool
+     */
     public static function update($sql)
     {
         global $database;
@@ -39,6 +51,10 @@ class ModelsDatabase
         }
     }
 
+    /**
+     * @param $sql
+     * @return bool
+     */
     public function delete($sql) {
 
         global $database;

@@ -1,13 +1,39 @@
 <?php
 require_once ("User.php");
 
+/**
+ *
+ */
 class RegisteredUser extends User
 {
+    /**
+     * @var
+     */
     private $address;
+    /**
+     * @var
+     */
     private $feePayment;
+    /**
+     * @var
+     */
     private $expiryDate;
+    /**
+     * @var
+     */
     private $creditCardNumber;
 
+    /**
+     * @param $userId
+     * @param $email
+     * @param $password
+     * @param $name
+     * @param $role
+     * @param $address
+     * @param $feePayment
+     * @param $expiryDate
+     * @param $creditCardNumber
+     */
     public function __construct($userId, $email, $password, $name, $role, $address, $feePayment, $expiryDate, $creditCardNumber)
     {
         parent::__construct($userId, $email, $password, $name, $role);
@@ -17,6 +43,9 @@ class RegisteredUser extends User
         $this->creditCardNumber = $creditCardNumber;
     }
 
+    /**
+     * @return bool|mixed
+     */
     public function dbCreate()
     {
         $sql = "INSERT INTO ";
@@ -25,6 +54,10 @@ class RegisteredUser extends User
         return self::create($sql);
     }
 
+    /**
+     * @param $updateType
+     * @return bool|void
+     */
     public function dbUpdate($updateType)
     {
         if ($updateType == "feePayment"){

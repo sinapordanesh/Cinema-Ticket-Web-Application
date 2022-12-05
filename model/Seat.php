@@ -3,11 +3,29 @@ require_once ("ModelsDatabase.php");
 
 class Seat extends ModelsDatabase
 {
+    /**
+     * @var
+     */
     private $seatId;
+    /**
+     * @var
+     */
     private $theater;
+    /**
+     * @var
+     */
     private $showTime;
+    /**
+     * @var
+     */
     private $available;
 
+    /**
+     * @param $seatId
+     * @param $theater
+     * @param $showTime
+     * @param $available
+     */
     public function __construct($seatId, $theater, $showTime, $available)
     {
         $this->seatId = $seatId;
@@ -16,6 +34,13 @@ class Seat extends ModelsDatabase
         $this->available = $available;
     }
 
+    /**
+     * @param $seatId
+     * @param $theater
+     * @param $showTime
+     * @param $status
+     * @return bool
+     */
     public static function dbUpdateAvailability($seatId, $theater, $showTime, $status)
     {
         $sql = "UPDATE seats";

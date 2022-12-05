@@ -1,12 +1,25 @@
 <?php
 require_once ("Controller.php");
 
+/**
+ *
+ */
 class PurchaseController extends Controller
 {
 
+    /**
+     * @var
+     */
     private $movie;
+    /**
+     * @var array
+     */
     private $theaters = array();
 
+    /**
+     * @param $name
+     * @return void
+     */
     public function searchMovieByName($name = ""){
         $result = self::find_this_query("SELECT * FROM movies WHERE name LIKE '%$name%'");
 
@@ -17,6 +30,10 @@ class PurchaseController extends Controller
         }
     }
 
+    /**
+     * @param $name
+     * @return void
+     */
     public function searchTheaterByMovieName($name = ""){
         $result = self::find_this_query("SELECT * FROM theaters WHERE movie LIKE '%$name%'");
 
@@ -25,6 +42,9 @@ class PurchaseController extends Controller
         }
     }
 
+    /**
+     * @return array
+     */
     public function getAvailableTheaterNames(){
         $theaterNames = array();
         foreach ($this->theaters as $theater){
@@ -34,6 +54,10 @@ class PurchaseController extends Controller
         return $theaterNames;
     }
 
+    /**
+     * @param $theaterName
+     * @return array
+     */
     public function getTheaterAvailableTime($theaterName){
         $theaterObjects = array();
 
@@ -46,7 +70,18 @@ class PurchaseController extends Controller
         return $theaterObjects;
     }
 
-    public static function ticketCreation($userId, $movie,$theater, $showTime, $purchaseTime, $seatNumber, $price, $email){
+    /**
+     * @param $userId
+     * @param $movie
+     * @param $theater
+     * @param $showTime
+     * @param $purchaseTime
+     * @param $seatNumber
+     * @param $price
+     * @param $email
+     * @return bool
+     */
+    public static function ticketCreation($userId, $movie, $theater, $showTime, $purchaseTime, $seatNumber, $price, $email){
         $uniqueId = rand(100000, 999999);
         $ticket = new Ticket($uniqueId, $userId, $movie, $theater, $showTime, $purchaseTime, $seatNumber, $price, $email);
         if ($ticket->dbCreate()){
@@ -58,6 +93,9 @@ class PurchaseController extends Controller
         }
     }
 
+    /**
+     * @return bool
+     */
     public static function emailSender(){
         $singleton = Singleton::getOnlyInstance();
         $ticket = $singleton->getLastAddedTicket();
@@ -74,6 +112,11 @@ class PurchaseController extends Controller
         }
     }
 
+    /**
+     * @param $uniqueId
+     * @param $ticketPrice
+     * @return false|mixed
+     */
     public static function couponDiscount($uniqueId, $ticketPrice){
         $result = self::find_this_query("SELECT * FROM coupon WHERE uniqueId = '$uniqueId'");
         if (!empty($result)){

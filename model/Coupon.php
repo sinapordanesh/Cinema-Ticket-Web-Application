@@ -2,12 +2,29 @@
 
 require_once ("ModelsDatabase.php");
 
+/**
+ *
+ */
 class Coupon extends ModelsDatabase
 {
+    /**
+     * @var
+     */
     private $uniqueId;
+    /**
+     * @var
+     */
     private $amount;
+    /**
+     * @var
+     */
     private $expiryDate;
 
+    /**
+     * @param $uniqueId
+     * @param $amount
+     * @param $expiryDate
+     */
     function __construct($uniqueId, $amount, $expiryDate){
         $this->uniqueId = $uniqueId;
         $this->amount = $amount;
@@ -15,6 +32,9 @@ class Coupon extends ModelsDatabase
     }
 
 
+    /**
+     * @return bool
+     */
     public function dbCreate()
     {
         $sql = "INSERT INTO ";
@@ -25,6 +45,9 @@ class Coupon extends ModelsDatabase
 
     }
 
+    /**
+     * @return bool
+     */
     public function dbDelete()
     {
         $sql = "DELETE FROM ";

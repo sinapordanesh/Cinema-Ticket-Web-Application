@@ -3,9 +3,19 @@ require_once ("Controller.php");
 
 class TicketCancellingController extends Controller
 {
+    /**
+     * @var
+     */
     private $ticket;
+    /**
+     * @var
+     */
     private $coupon;
 
+    /**
+     * @param $id
+     * @return int|mixed
+     */
     public function searchTicketById($id){
         $result = self::find_this_query("SELECT * FROM tickets WHERE uniqueId='$id'");
 
@@ -17,6 +27,10 @@ class TicketCancellingController extends Controller
         }
     }
 
+    /**
+     * @param $showTime
+     * @return bool
+     */
     public static function checkCancellationEligibility($showTime){
         if(($showTime - time()) < 259200){
             return false;
@@ -25,6 +39,11 @@ class TicketCancellingController extends Controller
         }
     }
 
+    /**
+     * @param $amount
+     * @param $user
+     * @return void
+     */
     public function couponCreation($amount, $user){
         if (!$user){
             $amount = $amount * .85;
@@ -33,6 +52,9 @@ class TicketCancellingController extends Controller
         $this->coupon->dbCreate();
     }
 
+    /**
+     * @return void
+     */
     public function ticketDeleting(){
         $this->ticket->dbDelete();
     }

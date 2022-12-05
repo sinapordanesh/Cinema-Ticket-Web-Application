@@ -3,16 +3,54 @@ require_once ("ModelsDatabase.php");
 
 class Ticket extends ModelsDatabase
 {
+    /**
+     * @var
+     */
     private $uniqueId;
+    /**
+     * @var int
+     */
     private $userId = -1;
+    /**
+     * @var
+     */
     private $movie;
+    /**
+     * @var
+     */
     private $theater;
+    /**
+     * @var
+     */
     private $showTime;
+    /**
+     * @var
+     */
     private $purchaseTime;
+    /**
+     * @var
+     */
     private $seatNumber;
+    /**
+     * @var
+     */
     private $price;
+    /**
+     * @var
+     */
     private $email;
 
+    /**
+     * @param $uniqueId
+     * @param $userId
+     * @param $movie
+     * @param $theater
+     * @param $showTime
+     * @param $purchaseTime
+     * @param $seatNumber
+     * @param $price
+     * @param $email
+     */
     public function __construct($uniqueId, $userId, $movie, $theater, $showTime, $purchaseTime, $seatNumber, $price, $email)
     {
         $this->uniqueId = $uniqueId;
@@ -26,6 +64,9 @@ class Ticket extends ModelsDatabase
         $this->email = $email;
     }
 
+    /**
+     * @return bool
+     */
     public function dbCreate()
     {
         $sql = "INSERT INTO ";
@@ -34,6 +75,9 @@ class Ticket extends ModelsDatabase
         return self::create($sql) && Seat::dbUpdateAvailability($this->seatNumber, $this->theater, $this->showTime, 0);;
     }
 
+    /**
+     * @return bool
+     */
     public function dbDelete()
     {
         $sql = "DELETE FROM ";

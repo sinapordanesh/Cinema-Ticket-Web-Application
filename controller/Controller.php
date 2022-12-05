@@ -1,8 +1,15 @@
 <?php
 
+/**
+ *
+ */
 class Controller
 {
 
+    /**
+     * @param $sql
+     * @return array
+     */
     public static function find_this_query($sql)
     {
         global $database;
