@@ -49,13 +49,13 @@ function redirect($location, $get = "")
 //    $mail->Host = 'smtp.sendgrid.net';                     //Set the SMTP server to send through
 //    $mail->SMTPAuth = true;                                   //Enable SMTP authentication
 //    $mail->Username = 'apikey';                     //SMTP username
-//    $mail->Password = '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';                                  //SMTP password
+//    $mail->Password = '';                                  //SMTP password
 //    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
 //    $mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 //
 //    //Recipients
-//    $mail->setFrom('myhomeqrc@gmail.com', 'sina');
-//    $mail->addAddress('sina.pordanesh@yahoo.com');     //Add a recipient
+//    $mail->setFrom('', 'sina');
+//    $mail->addAddress('');     //Add a recipient
 //
 //    //Content
 //    $mail->isHTML(true);                                  //Set email format to HTML
